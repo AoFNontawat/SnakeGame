@@ -15,7 +15,7 @@ namespace SnakeGame
         public SnakeGameController()
         {
             // update the board every one second;
-            timer = new Timer(SnakeGameModel.TIME_BASE / SnakeGameModel.Speed);
+            timer = new Timer(SnakeGameModel.TIME_BASE / SnakeGameModel.MIN_SPEED);
             timer.Enabled = false;
             timer.Elapsed += this.OnTimedEvent;
         }
@@ -44,16 +44,8 @@ namespace SnakeGame
             }
             // Find all snakeboard model we know
             if (direction == -1) return;
-            foreach (Model m in mList)
-            {
-                if (m is SnakeGameModel)
-                {
-                    // Tell the model to update
-                    SnakeGameModel sbm = (SnakeGameModel)m;
-                    sbm.SetDirection(direction);
-                }
-            }
-
+            SnakeGameModel sbm = (SnakeGameModel)model;
+            sbm.SetDirection(direction);
         }
 
 
@@ -71,16 +63,10 @@ namespace SnakeGame
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             Snake.Debug("TE");
-            foreach (Model m in mList)
-            {
-                if (m is SnakeGameModel)
-                {
-                    SnakeGameModel sbm = (SnakeGameModel)m;
-                    sbm.Move();
-                    sbm.Update();
-                }
-            }
-            timer.Interval = SnakeGameModel.TIME_BASE / SnakeGameModel.Speed;
+            SnakeGameModel sbm = (SnakeGameModel)model;
+            sbm.Move();
+            sbm.Update();
+            timer.Interval = SnakeGameModel.TIME_BASE / sbm.Speed;
         }
 
     }

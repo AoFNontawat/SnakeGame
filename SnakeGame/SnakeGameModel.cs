@@ -48,9 +48,10 @@ namespace SnakeGame
 
         public const int TIME_BASE = 250;
         public const int MAX_SPEED = 250;
-        protected static int _speed = 1;
+        public const int MIN_SPEED = 1;
+        protected int _speed = MIN_SPEED;
 
-        public static int Speed
+        public int Speed
         {
             set
             {
@@ -63,8 +64,8 @@ namespace SnakeGame
         }
         
         // Accessor for outsider
-        public Boolean isHit { get{ return _isHit; } }  // this property is also readonly for outsider
-        public Boolean isEating { get { return _isEating;  } }
+        public Boolean IsHit { get{ return _isHit; } }  // this property is also readonly for outsider
+        public Boolean IsEating { get { return _isEating;  } }
         public int[,] Board { get { return _board; } }
 
         public SnakeGameModel(int w, int h)
@@ -120,8 +121,8 @@ namespace SnakeGame
             int x, y;
             do
             {
-                x = rand.Next(boardWidth);
-                y = rand.Next(boardHeight);
+                x = rand.Next(1, boardWidth - 1);
+                y = rand.Next(1, boardHeight - 1);
             } while (isSnakeBody(x, y));
             _board[x, y] = BOARD_FOOD;
         }

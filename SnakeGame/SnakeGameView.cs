@@ -30,13 +30,14 @@ namespace SnakeGame
             try
             {
                 graphics = new GraphicsDeviceManager(this);
+                graphics.PreferMultiSampling = false;
                 graphics.PreferredBackBufferWidth = _w * TILE_SIZE;
                 graphics.PreferredBackBufferHeight = _h * TILE_SIZE;
                 Content.RootDirectory = "Content";
             }
             catch (Exception e)
             {
-                MessageBox.Show("Can't initilize game engine, error is " + e.Message);
+                System.Windows.Forms.MessageBox.Show("Can't initilize game engine, error is " + e.Message);
                 throw (e);
             }
         }
@@ -60,7 +61,7 @@ namespace SnakeGame
                 }
             } catch (Exception ex)
             {
-                MessageBox.Show("Can't load asset " + ex.ToString());
+                System.Windows.Forms.MessageBox.Show("Can't load asset " + ex.ToString());
                 Exit();
             }
             base.LoadContent();
@@ -127,13 +128,13 @@ namespace SnakeGame
             {
                 sbm = (SnakeGameModel)m;
 
-                if (sbm.isHit)
+                if (sbm.IsHit)
                 {
                     controller.Stop();
-                    MessageBox.Show("Game over!!, your score is " + (sbm.SnakeLength() - SnakeGameModel.SNAKE_INIT_SIZE));
+                    System.Windows.Forms.MessageBox.Show("Game over!!, your score is " + (sbm.SnakeLength() - SnakeGameModel.SNAKE_INIT_SIZE));
                 }
 
-                if (sbm.isEating)
+                if (sbm.IsEating)
                 {
                     Snake.Debug("Eating");
                 }

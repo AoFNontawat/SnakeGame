@@ -8,16 +8,15 @@ namespace SnakeGame
 {
     public class Controller
     {
-        protected ArrayList mList;
+        protected Model model;
 
         public Controller()
         {
-            mList = new ArrayList();
         }
 
         public void AddModel(Model m)
         {
-            mList.Add(m);
+            model = m;
         }
 
         // virtual keyword allow the method to be overriden
